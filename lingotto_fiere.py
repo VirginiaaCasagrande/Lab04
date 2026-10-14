@@ -9,13 +9,13 @@ class LingottoFiere:
         self.elencoStand=[]
         self.elencoEspositori=[]
 
-        @property
-        def nome(self):
-            return self.__nome
+    @property
+    def nome(self):
+        return self.__nome
 
-        @nome.setter
-        def nome(self, nome):
-            self.__nome=nome
+    @nome.setter
+    def nome(self, nome):
+        self.__nome=nome
         # TODO
 
     """Aggiungere setter e getter se necessari"""
@@ -55,11 +55,33 @@ class LingottoFiere:
     def assegna_stand_a_espositore(self, codice_stand, codice_espositore):
         """Associa uno stand a un espositore"""
 
+        stand_trovato = None
+        for stand in self.elencoStand:
+            if stand.codice == codice_stand:
+                stand_trovato = stand
+                break
+        if stand_trovato is None:
+            raise ValueError ('Il codice non corrisponde a nessuno stand')
 
+        espositore_trovato = None
+        for espositore in self.elencoEspositori:
+            if espositore.codice == codice_espositore:
+                espositore_trovato = espositore
+                break
 
+        if espositore_trovato is None:
+            raise ValueError ('Il codice non corrisponde a nessun espositore')
 
+        if not stand_trovato.disponibile:
+            raise ValueError ('Lo stand non è disponibile')
 
-        # TODO
+        for stand in self.elencoStand:
+            if stand.espositore == espositore_trovato:
+                raise ValueError ('L\'espositore è già associato a un altro stand')
+
+        stand_trovato.espositore = espositore_trovato
+        stand_trovato.disponibile = False
+
 
     def elenca_espositori(self):
         """Stampa l'elenco degli espositori mostrando, per ognuno, lo stand a cui è associato, quando applicabile """
