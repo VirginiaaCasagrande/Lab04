@@ -1,6 +1,17 @@
 class LingottoFiere:
     def __init__(self, nome):
         """Inizializza gli attributi e le strutture dati"""
+        self.__nome=nome
+        self.elencoStand=[]
+        self.elencoEspositori=[]
+
+        @property
+        def nome(self):
+            return self.__nome
+
+        @nome.setter
+        def nome(self, nome):
+            self.__nome=nome
         # TODO
 
     """Aggiungere setter e getter se necessari"""
