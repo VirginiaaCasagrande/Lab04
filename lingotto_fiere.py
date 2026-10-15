@@ -16,10 +16,6 @@ class LingottoFiere:
     @nome.setter
     def nome(self, nome):
         self.__nome=nome
-        # TODO
-
-    """Aggiungere setter e getter se necessari"""
-    # TODO
 
     def carica_file_dati(self, file_path):
         """Carica i dati (stand ed espositori) dal file"""
@@ -33,7 +29,7 @@ class LingottoFiere:
 
                     if campi[0].startswith('ST'):
                         if len(campi) == 4:
-                            stand=StandStandard(campi[0], float(campi[1]), int(campi[2]), campi[3])
+                            stand=StandStandard(campi[0], float(campi[1]), int(campi[2]), float(campi[3]))
                             self.elencoStand.append(stand)
 
                         elif len(campi) ==5 :
@@ -85,8 +81,27 @@ class LingottoFiere:
 
     def elenca_espositori(self):
         """Stampa l'elenco degli espositori mostrando, per ognuno, lo stand a cui è associato, quando applicabile """
-        # TODO
+
+        espositori_tot=[]
+
+        for espositore in self.elencoEspositori:
+            codice_stand=None
+
+            for stand in self.elencoStand:
+                if stand.espositore == espositore:
+                    codice_stand=stand.codice
+                    break
+            espositori_tot.append([espositore, codice_stand])
+
+        for elemento in espositori_tot:
+            if elemento[1] is not None:
+                print (f'{elemento[0]}, stand assegnato: {elemento[1]}')
+            else:
+                print (f'{elemento[0]}, nessuno stand assegnato')
+
 
     def stand_ordinati_per_prezzo(self):
         """Restituisce la lista ordinata degli stand in base al prezzo"""
-        # TODO
+
+        return sorted(self.elencoStand)
+

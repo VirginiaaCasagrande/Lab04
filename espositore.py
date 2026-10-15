@@ -7,3 +7,8 @@ class Espositore:
 
     def __str__(self):
         return f'{self.codice} {self.nome} {self.cognome}'
+
+    def __eq__(self, other):
+        if not isinstance(other, Espositore):
+            return NotImplemented
+        return self.codice == other.codice
